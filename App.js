@@ -1,10 +1,11 @@
 import React from 'react';
 import {SafeAreaView, StyleSheet, Text} from 'react-native';
+import Config from 'react-native-config';
 
 const App = () => {
   return (
     <SafeAreaView style={styles.container}>
-      <Text>APP TITLE</Text>
+      <Text>{Config.API_URL}</Text>
     </SafeAreaView>
   );
 };
