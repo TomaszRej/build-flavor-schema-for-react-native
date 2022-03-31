@@ -1,7 +1,16 @@
 apply plugin: "com.android.application"
 
 // react-native-config
-// 2nd line, add a new apply:
+project.ext.envConfigFiles = [
+    release: ".env.dev",
+    debug: ".env.dev",
+    devRelease: ".env.dev",
+    devDebug: ".env.dev",
+    prodRelease: ".env.prod",
+    prodDebug: ".env.prod"
+]
+
+// react native config
 apply from: project(':react-native-config').projectDir.getPath() + "/dotenv.gradle"
 
 import com.android.build.OutputFile
@@ -133,6 +142,26 @@ android {
     ndkVersion rootProject.ext.ndkVersion
 
     compileSdkVersion rootProject.ext.compileSdkVersion
+
+    flavorDimensions "default"
+    productFlavors {
+        dev {
+            minSdkVersion rootProject.ext.minSdkVersion
+            applicationId "com.multipleenvs.dev"
+            targetSdkVersion rootProject.ext.targetSdkVersion
+            resValue "string", "build_config_package", "com.multipleenvs"
+            versionCode 1
+            versionName "1.0"
+        }
+        prod {
+            minSdkVersion rootProject.ext.minSdkVersion
+            applicationId "com.multipleenvs.prod"
+            targetSdkVersion rootProject.ext.targetSdkVersion
+            resValue "string", "build_config_package", "com.multipleenvs"
+            versionCode 1
+            versionName "1.0"
+        }
+    }
 
     defaultConfig {
         applicationId "com.multipleenvs"
